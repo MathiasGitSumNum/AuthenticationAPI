@@ -29,14 +29,14 @@ public class AuthImpl {
             List<User> userList = repo.findAll();
             List<User> foundUsers = userList.stream().filter(user1 -> user1.getEmail().equals(user.getEmail())).toList();
             if (foundUsers.isEmpty()){
-                return new Response(400, "Password or Email do not match");
+                return new Response(400, "You must enter an email and password");
             }
             User foundUser = foundUsers.getFirst();
             if (foundUser.getEmail() == null || foundUser.getPassword() == null){
                 return new Response(400, "You must enter a email and password");
             }
             if (!foundUser.getEmail().equals(user.getEmail()) || !foundUser.getPassword().equals(user.getPassword())){
-                return new Response(400, "Password or Email do not match");
+                return new Response(400, "password or email do not match");
             }
         } catch (Exception e){
             return new Response(400, e.getMessage());
